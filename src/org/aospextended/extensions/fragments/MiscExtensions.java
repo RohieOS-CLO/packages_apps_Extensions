@@ -23,6 +23,13 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import androidx.preference.Preference;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -48,10 +55,7 @@ import java.util.List;
 @SearchIndexable
 public class MiscExtensions extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
-    private static final String KEY_STATUS_BAR_LOGO = "status_bar_logo";
     private static final String KEY_ROUND_CORNER_CAT = "corners_category";
-
-    private SwitchPreference mShowAexLogo;
 
     private static final String SYSUI_ROUNDED_SIZE = "sysui_rounded_size";
     private static final String SYSUI_ROUNDED_CONTENT_PADDING = "sysui_rounded_content_padding";
@@ -69,11 +73,6 @@ public class MiscExtensions extends SettingsPreferenceFragment implements OnPref
 
         final ContentResolver resolver = getActivity().getContentResolver();
         final PreferenceScreen prefSet = getPreferenceScreen();
-
-	    mShowAexLogo = (SwitchPreference) findPreference(KEY_STATUS_BAR_LOGO);
-        mShowAexLogo.setChecked((Settings.System.getInt(getContentResolver(),
-             Settings.System.STATUS_BAR_LOGO, 0) == 1));
-        mShowAexLogo.setOnPreferenceChangeListener(this);
 
         final PreferenceCategory roundCornerCategory = (PreferenceCategory) prefSet.findPreference(KEY_ROUND_CORNER_CAT);
 
@@ -115,7 +114,6 @@ public class MiscExtensions extends SettingsPreferenceFragment implements OnPref
         } else {
           prefSet.removePreference(roundCornerCategory);
         }
-
     }
 
     @Override
@@ -130,12 +128,7 @@ public class MiscExtensions extends SettingsPreferenceFragment implements OnPref
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if  (preference == mShowAexLogo) {
-            boolean value = (Boolean) objValue;
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.STATUS_BAR_LOGO, value ? 1 : 0);
-            return true;
-        } else if (preference == mCornerRadius) {
+         if (preference == mCornerRadius) {
             Settings.Secure.putIntForUser(getContext().getContentResolver(), Settings.Secure.SYSUI_ROUNDED_SIZE,
                     (int) objValue, UserHandle.USER_CURRENT);
             return true;

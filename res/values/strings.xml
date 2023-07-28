@@ -355,10 +355,6 @@
     <string name="qs_edit_title">Edit Icon</string>
     <string name="qs_edit_summary">Enable the tile edit icon in the footer</string>
 
-	    <!-- AEX logo -->
-    <string name="aex_logo_title">AEX logo</string>
-    <string name="aex_logo_summary">Let everyone know that you\'re using AEX when they see your screen</string>
-
     <!-- Statusbar net monitor -->
     <string name="traffic_title">Traffic Indicators</string>
     <string name="network_traffic">Network traffic</string>
@@ -377,6 +373,7 @@
     <string name="show_network_traffic_down">Download</string>
     <string name="show_network_traffic_all">Both</string>
     <string name="nettraf_font_size">Single net font size</string>
+
 
     <!-- Lockscreen media artwork -->
     <string name="lockscreen_media_blur_title">Media art blur level</string>
