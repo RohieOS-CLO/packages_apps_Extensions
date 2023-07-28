@@ -84,7 +84,7 @@
             android:key="use_new_searchbar"
             android:title="@string/search_bar_style_title"
             android:summary="@string/search_bar_style_summary"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
 
     </PreferenceCategory>
 
